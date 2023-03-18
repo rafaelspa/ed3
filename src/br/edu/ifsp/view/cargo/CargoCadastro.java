@@ -12,45 +12,29 @@ public class CargoCadastro {
 	static Scanner entrada = new Scanner(System.in);
 	
 	public static void exibeInterface() {
-		String nome;
-		Character sexo = null;
-		BigDecimal salario = null;
-		boolean planoSaude;
+		String descricao;
 
-		System.out.println("\nCADASTRO DE FUNCION�RIO:");
-		System.out.print("NOME: ");
-		nome = entrada.nextLine();
-		System.out.print("SEXO (Digite 'm' ou 'f'): ");
-		sexo = entrada.nextLine().toUpperCase().charAt(0);
-		System.out.print("SAL�RIO (R$): ");
-		salario = new BigDecimal(entrada.nextLine());
-		System.out.print("PLANO DE SA�DE (Digite 's' ou 'n'): ");
-		if (entrada.nextLine().equals("s"))
-			planoSaude = true;
-		else
-			planoSaude = false;
+		System.out.println("\nCADASTRO DE CARGO:");
+		System.out.print("DESCRICAO: ");
+		descricao = entrada.nextLine();
 
 		List<String> erros = new ArrayList<String>();
 		
-		// Envia os dados do funcion�rio (informados no formul�rio) ao controller. 
-		// O controller retorna ent�o um ArrayList contendo os erros encontrados.
-		erros = new FuncionarioController().insereFuncionario(nome,
-												              sexo,
-												              salario,
-										                      planoSaude,
-										                      leCargo());
+		// Envia os dados do cargo (informados no formulario) ao controller. 
+		// O controller retorna entao um ArrayList contendo os erros encontrados.
+		erros = new CargoController().insereCargo(descricao, leDepartamento());
 		
 		if (erros.get(0) == null) { // Se o primeiro elemento do ArrayList for null.
-			System.out.println("Funcion�rio cadastrado com sucesso.\n");
-		} else { // Se o primeiro elemento do ArrayList n�o for null.
-			String mensagem = "N�o foi poss�vel cadastrar o funcion�rio:\n";
+			System.out.println("Cargo cadastrado com sucesso.\n");
+		} else { // Se o primeiro elemento do ArrayList nao for null.
+			String mensagem = "Nao foi possivel cadastrar o funcionario:\n";
 			for (String e : erros) // Cria uma mensagem contendo todos os erros armazenados no ArrayList.
 				mensagem = mensagem + e + "\n";
 			System.out.println(mensagem);
 		}
 	}
 	
-	public static Cargo leCargo() {
+	public static Departamento leDepartamento() {
 		int codCargo;
 		Cargo cargo = new Cargo();
 		
