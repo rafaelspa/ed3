@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifsp.dao.CargoDao;
 import br.edu.ifsp.dao.FuncionarioDao;
 import br.edu.ifsp.model.cargo.Cargo;
 import br.edu.ifsp.model.departamento.Departamento;
@@ -17,7 +18,7 @@ public class CargoController {
     public List<String> insereCargo(String descricao, Departamento departamento) {
     	recebeDadosCargo(null, descricao, departamento);
     	
-		// Se nenhum erro de validacao for encontrado, tenta inserir o funcionario no banco.
+		// Se nenhum erro de validacao for encontrado, tenta inserir o cargo no banco.
 		if (erros.size() == 0)
 			erros.add(new CargoDao().insereCargo(cargo));
 		
