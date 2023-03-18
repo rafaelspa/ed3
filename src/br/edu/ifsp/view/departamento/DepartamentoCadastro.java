@@ -48,8 +48,8 @@ public class DepartamentoCadastro {
 		if (funcionarios.size() != 0) { // Se existir pelo menos um funcionario cadastrado.
 			System.out.println("FUNCIONARIOS CADASTRADOS: ");
 			for (Funcionario f : funcionarios)
-				System.out.println(f.getId() + " - " + f.getNome() + " - " + f.getSexo() + " - " + f.getCargo() + " - "
-						+ f.getSalario());
+				System.out.println(
+						f.getId() + " - " + f.getNome() + " - " + f.getSexo().toString() + " - " + f.getSalario());
 
 			System.out.print("FUNCIONARIO (Digite o codigo do funcionario): ");
 			idFuncGerente = Integer.parseInt(entrada.nextLine());
