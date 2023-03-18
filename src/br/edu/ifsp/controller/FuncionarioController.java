@@ -16,24 +16,24 @@ public class FuncionarioController {
     public List<String> insereFuncionario(String nome, Character sexo, BigDecimal salario, Boolean planoSaude, Cargo cargo) {
     	recebeDadosFuncionario(null, nome, sexo, salario, planoSaude, cargo);
     	
-		// Se nenhum erro de validação for encontrado, tenta inserir o funcionário no banco.
+		// Se nenhum erro de validacao for encontrado, tenta inserir o funcionario no banco.
 		if (erros.size() == 0)
 			erros.add(new FuncionarioDao().insereFuncionario(funcionario));
 		
 		// Retorna o ArrayList contendo:
-		// - Em caso de sucesso: null na 1ª posição; OU
-		// - Em caso de exceção: uma mensagem de exceção na 1ª posição; OU
-		// - Em caso de erro de validação: mensagens de erro iniciando na 1ª posição.
+		// - Em caso de sucesso: null na 1a posicao; OU
+		// - Em caso de excecao: uma mensagem de excecao na 1a posicao; OU
+		// - Em caso de erro de validacao: mensagens de erro iniciando na 1a posicao.
 		return erros; 
     }
     
-    // Método usado pelas operações de inserção e alteração de funcionário.
+    // Metodo usado pelas operacoes de insercao e alteracao de funcionario.
     public void recebeDadosFuncionario(Integer id, String nome, Character sexo, BigDecimal salario, Boolean planoSaude, Cargo cargo) {
     	funcionario = new Funcionario();
     	erros = new ArrayList<String>();
 
-		// Os métodos set abaixo criam um objeto Funcionario contendo os dados do funcionário informado.
-		// Este objeto será enviado à classe DAO, que fará a inserção de seus dados no banco.
+		// Os metodos set abaixo criam um objeto Funcionario contendo os dados do funcionario informado.
+		// Este objeto sera enviado a classe DAO, que fara a insercao de seus dados no banco.
     	funcionario.setId(id);
     	funcionario.setNome(nome);
 		funcionario.setSexo(sexo);
@@ -41,7 +41,7 @@ public class FuncionarioController {
 		funcionario.setPlanoSaude(planoSaude);
 		funcionario.setCargo(cargo);
         
-		// Retorna um ArrayList contendo os erros encontrados em regras de validação e de negócios.
+		// Retorna um ArrayList contendo os erros encontrados em regras de validacao e de negocios.
 		erros = FuncionarioValidacao.validaFuncionario(funcionario);
     }
     
@@ -51,7 +51,7 @@ public class FuncionarioController {
     }
     
     public String getExcecao() {
-    	// Retorna a exceção lançada ao recuperar os cargos (ao abrir a interface "Cadastro de Funcionário").
+    	// Retorna a excecao lancada ao recuperar os cargos (ao abrir a interface "Cadastro de Funcionario").
     	return new FuncionarioDao().getExcecao();
     }
 }

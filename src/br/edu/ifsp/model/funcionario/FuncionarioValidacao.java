@@ -15,7 +15,7 @@ public class FuncionarioValidacao {
 			if (funcionario.getNome().length() < 5 || funcionario.getNome().length() > 100)
 				errosValidacao.add("* O Nome deve ter entre 5 e 100 caracteres.");
 		} else {
-			errosValidacao.add("* O Nome n�o foi informado.");
+			errosValidacao.add("* O Nome nao foi informado.");
 		}
 		
 		// Validacao do campo Salario.
