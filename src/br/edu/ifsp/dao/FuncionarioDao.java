@@ -9,9 +9,9 @@ import br.edu.ifsp.model.cargo.Cargo;
 import br.edu.ifsp.model.funcionario.Funcionario;
 
 public class FuncionarioDao extends GenericDao {
-	private String instrucaoSql; // Atributo para armazenar a instrução SQL a ser executada.
-	private PreparedStatement comando; // Atributo usado para preparar e executar instruções SQL.
-	private ResultSet registros; // Atributo que recebe os dados retornados por uma instrução SQL.
+	private String instrucaoSql; // Atributo para armazenar a instrucao SQL a ser executada.
+	private PreparedStatement comando; // Atributo usado para preparar e executar instrucoes SQL.
+	private ResultSet registros; // Atributo que recebe os dados retornados por uma instrucao SQL.
 	private static String excecao = null; // Atributo para armazenar mensagens de excecao.
 
     public String insereFuncionario(Funcionario funcionario) {
@@ -26,18 +26,18 @@ public class FuncionarioDao extends GenericDao {
         instrucaoSql = "SELECT * FROM CARGO";
         
         try {
-        	excecao = ConnectionDatabase.conectaBd(); // Abre a conexão com o banco de dados.
+        	excecao = ConnectionDatabase.conectaBd(); // Abre a conexao com o banco de dados.
         	if (excecao == null) {
-                // Obtém os dados de conexão com o banco de dados e prepara a instrução SQL.
+                // Obtem os dados de conexao com o banco de dados e prepara a instrucao SQL.
                 comando = ConnectionDatabase.getConexaoBd().prepareStatement(instrucaoSql);
                 
-                // Executa a instrução SQL e retorna os dados ao objeto ResultSet.
+                // Executa a instrucao SQL e retorna os dados ao objeto ResultSet.
                 registros = comando.executeQuery();
                 
                 if (registros.next()) { // Se for retornado pelo menos um registro.
-                    registros.beforeFirst(); // Retorna o cursor para antes do 1º registro.
+                    registros.beforeFirst(); // Retorna o cursor para antes do 1o registro.
         	        while (registros.next()) {
-                        // Atribui o Id e a Descrição do cargo ao objeto Cargo por meio dos métodos set e
+                        // Atribui o Id e a Descricao do cargo ao objeto Cargo por meio dos metodos set e
                         // adiciona este objeto ao ArrayList funcionarios.
         	            cargo = new Cargo();
         	            cargo.setId(registros.getInt("Id"));
@@ -47,17 +47,17 @@ public class FuncionarioDao extends GenericDao {
         	    }
                 registros.close(); // Libera os recursos usados pelo objeto ResultSet.
                 comando.close(); // Libera os recursos usados pelo objeto PreparedStatement.
-                // Libera os recursos usados pelo objeto Connection e fecha a conexão com o banco de dados.
+                // Libera os recursos usados pelo objeto Connection e fecha a conexao com o banco de dados.
                 ConnectionDatabase.getConexaoBd().close(); 
             }
         } catch (Exception e) {
-        	excecao = "Tipo de Exceção: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
-        	cargos = null; // Caso ocorra qualquer exceção.
+        	excecao = "Tipo de Excecao: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
+        	cargos = null; // Caso ocorra qualquer excecao.
         }
         return cargos; // Retorna o ArrayList de objetos Cargo.
     }
     
-    // Esse método é necessário, porque os métodos "recuperaCargos" e "consultaFuncionarios" retornam List<> e não String.
+    // Esse metodo e necessario, porque os metodos "recuperaCargos" e "consultaFuncionarios" retornam List<> e nao String.
 	public String getExcecao() {
 		return excecao;
 	}
