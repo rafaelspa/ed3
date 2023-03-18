@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import br.edu.ifsp.controller.CargoController;
 import br.edu.ifsp.controller.FuncionarioController;
 import br.edu.ifsp.model.cargo.Cargo;
 

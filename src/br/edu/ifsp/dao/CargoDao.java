@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsp.model.cargo.Cargo;
-import br.edu.ifsp.model.funcionario.Funcionario;
+import br.edu.ifsp.model.departamento.Departamento;
 
 public class CargoDao extends GenericDao {
-	private String instrucaoSql; // Atributo para armazenar a instru��o SQL a ser executada.
-	private PreparedStatement comando; // Atributo usado para preparar e executar instru��es SQL.
-	private ResultSet registros; // Atributo que recebe os dados retornados por uma instru��o SQL.
+	private String instrucaoSql; // Atributo para armazenar a instrucao SQL a ser executada.
+	private PreparedStatement comando; // Atributo usado para preparar e executar instrucoes SQL.
+	private ResultSet registros; // Atributo que recebe os dados retornados por uma instrucao SQL.
 	private static String excecao = null; // Atributo para armazenar mensagens de excecao.
 
     public String insereCargo(Cargo cargo) {
@@ -19,44 +19,44 @@ public class CargoDao extends GenericDao {
         return insere(instrucaoSql, cargo.getDescricao(), cargo.getDepartamento().getId());
     }
     
-    public List<Cargo> recuperaCargos() {
-        Cargo cargo;
-        List<Cargo> cargos = new ArrayList<Cargo>();
-        instrucaoSql = "SELECT * FROM CARGO";
+    public List<Departamento> recuperaDepartamentos() {
+        Departamento departamento;
+        List<Departamento> departamentos = new ArrayList<Departamento>();
+        instrucaoSql = "SELECT * FROM DEPARTAMENTO";
         
         try {
-        	excecao = ConnectionDatabase.conectaBd(); // Abre a conex�o com o banco de dados.
+        	excecao = ConnectionDatabase.conectaBd(); // Abre a conexao com o banco de dados.
         	if (excecao == null) {
-                // Obt�m os dados de conex�o com o banco de dados e prepara a instru��o SQL.
+                // Obtem os dados de conexao com o banco de dados e prepara a instrucao SQL.
                 comando = ConnectionDatabase.getConexaoBd().prepareStatement(instrucaoSql);
                 
-                // Executa a instru��o SQL e retorna os dados ao objeto ResultSet.
+                // Executa a instrucao SQL e retorna os dados ao objeto ResultSet.
                 registros = comando.executeQuery();
                 
                 if (registros.next()) { // Se for retornado pelo menos um registro.
-                    registros.beforeFirst(); // Retorna o cursor para antes do 1� registro.
+                    registros.beforeFirst(); // Retorna o cursor para antes do 1o registro.
         	        while (registros.next()) {
-                        // Atribui o Id e a Descri��o do cargo ao objeto Cargo por meio dos m�todos set e
-                        // adiciona este objeto ao ArrayList funcionarios.
-        	            cargo = new Cargo();
-        	            cargo.setId(registros.getInt("Id"));
-        	            cargo.setDescricao(registros.getString("Descricao"));
-        	            cargos.add(cargo);
+                        // Atribui o Id e o Nome do departamento ao objeto Departamento por meio dos metodos set e
+                        // adiciona este objeto ao ArrayList departamentos.
+        	            departamento = new Departamento();
+        	            departamento.setId(registros.getInt("Id"));
+        	            departamento.setNomeDepto(registros.getString("NomeDepto"));
+        	            departamentos.add(departamento);
         	        }
         	    }
                 registros.close(); // Libera os recursos usados pelo objeto ResultSet.
                 comando.close(); // Libera os recursos usados pelo objeto PreparedStatement.
-                // Libera os recursos usados pelo objeto Connection e fecha a conex�o com o banco de dados.
+                // Libera os recursos usados pelo objeto Connection e fecha a conexao com o banco de dados.
                 ConnectionDatabase.getConexaoBd().close(); 
             }
         } catch (Exception e) {
-        	excecao = "Tipo de Exce��o: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
-        	cargos = null; // Caso ocorra qualquer exce��o.
+        	excecao = "Tipo de Excecao: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
+        	departamentos = null; // Caso ocorra qualquer excecao.
         }
-        return cargos; // Retorna o ArrayList de objetos Cargo.
+        return departamentos; // Retorna o ArrayList de objetos Departamento.
     }
     
-    // Esse m�todo � necess�rio, porque os m�todos "recuperaCargos" e "consultaFuncionarios" retornam List<> e n�o String.
+    // Esse metodo e necessario, porque os metodos "recuperaDepartamentos" e "consultaCargos" retornam List<> e nao String.
 	public String getExcecao() {
 		return excecao;
 	}
