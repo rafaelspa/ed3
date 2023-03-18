@@ -1,13 +1,11 @@
 package br.edu.ifsp.view.cargo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.edu.ifsp.controller.CargoController;
-import br.edu.ifsp.controller.FuncionarioController;
-import br.edu.ifsp.model.cargo.Cargo;
+import br.edu.ifsp.model.departamento.Departamento;
 
 public class CargoCadastro {
 	static Scanner entrada = new Scanner(System.in);
@@ -36,28 +34,28 @@ public class CargoCadastro {
 	}
 	
 	public static Departamento leDepartamento() {
-		int codCargo;
-		Cargo cargo = new Cargo();
+		int codDepartamento;
+		Departamento departamento = new Departamento();
 		
-		List<Cargo> cargos = new ArrayList<Cargo>();
-		// Retorna um ArrayList de objetos Cargo, contendo o Id e a Descri��o dos cargos cadastrados.
-		cargos = new FuncionarioController().recuperaCargos();		
-		String erro = new FuncionarioController().getExcecao();
-		if (erro != null) // Caso ocorra qualquer tipo de exce��o.
-			System.out.println("N�o foi poss�vel recuperar os dados dos cargos:\n" + erro);
+		List<Departamento> departamentos = new ArrayList<Departamento>();
+		// Retorna um ArrayList de objetos Departamento, contendo o Id e a Nome dos departamentos cadastrados.
+		departamentos = new CargoController().recuperaDepartamentos();		
+		String erro = new CargoController().getExcecao();
+		if (erro != null) // Caso ocorra qualquer tipo de excecao.
+			System.out.println("Nao foi possivel recuperar os dados dos departamentos:\n" + erro);
 		
-		if (cargos.size() != 0) { // Se existir pelo menos um cargo cadastrado.
-			System.out.println("CARGOS CADASTRADOS: ");
-			for (Cargo c : cargos)
-				System.out.println(c.getId() + " - " + c.getDescricao());
+		if (departamentos.size() != 0) { // Se existir pelo menos um departamento cadastrado.
+			System.out.println("DEPARTAMENTOS CADASTRADOS: ");
+			for (Departamento d : departamentos)
+				System.out.println(d.getId() + " - " + d.getNomeDepto());
 			
-			System.out.print("CARGO (Digite o c�digo do cargo): ");
-			codCargo = Integer.parseInt(entrada.nextLine());
-			for (Cargo c : cargos)
-				if (c.getId() == codCargo)
-					cargo = c;
+			System.out.print("DEPARTAMENTO (Digite o codigo do departamento): ");
+			codDepartamento = Integer.parseInt(entrada.nextLine());
+			for (Departamento d : departamentos)
+				if (d.getId() == codDepartamento)
+					departamento = d;
 		}
-		return cargo;
+		return departamento;
 	}
 }
 

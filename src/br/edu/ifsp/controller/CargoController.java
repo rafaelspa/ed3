@@ -1,15 +1,12 @@
 package br.edu.ifsp.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsp.dao.CargoDao;
-import br.edu.ifsp.dao.FuncionarioDao;
 import br.edu.ifsp.model.cargo.Cargo;
+import br.edu.ifsp.model.cargo.CargoValidacao;
 import br.edu.ifsp.model.departamento.Departamento;
-import br.edu.ifsp.model.funcionario.Funcionario;
-import br.edu.ifsp.model.funcionario.FuncionarioValidacao;
 
 public class CargoController {
 	private Cargo cargo;
@@ -29,7 +26,7 @@ public class CargoController {
 		return erros; 
     }
     
-    // Metodo usado pelas operacoes de insercao e alteracao de funcionario.
+    // Metodo usado pelas operacoes de insercao e alteracao de cargo.
     public void recebeDadosCargo(Integer id, String descricao, Departamento departamento) {
     	cargo = new Cargo();
     	erros = new ArrayList<String>();
