@@ -7,6 +7,7 @@ import br.edu.ifsp.view.cargo.CargoConsulta;
 import br.edu.ifsp.view.departamento.DepartamentoCadastro;
 import br.edu.ifsp.view.departamento.DepartamentoConsulta;
 import br.edu.ifsp.view.funcionario.FuncionarioCadastro;
+import br.edu.ifsp.view.funcionario.FuncionarioConsulta;
 
 public class Index {
 	public static void main(String[] args) {
@@ -71,7 +72,6 @@ public class Index {
 		else if (opcaoCadastro == 3 && opcaoOperacao == 1)
 			FuncionarioCadastro.exibeInterface();
 		else if (opcaoCadastro == 3 && opcaoOperacao == 2)
-			System.out.println(opcaoCadastro + " - " + opcaoOperacao + "\n");
-		// FuncionarioConsulta.exibeInterface();
+			FuncionarioConsulta.exibeInterface();
 	}
 }

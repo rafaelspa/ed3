@@ -54,5 +54,9 @@ public class FuncionarioController {
     	// Retorna a excecao lancada ao recuperar os cargos (ao abrir a interface "Cadastro de Funcionario").
     	return new FuncionarioDao().getExcecao();
     }
+
+	public List<Funcionario> recuperaFuncionarios() {
+		return new FuncionarioDao().consultaFuncionarios();
+	}
 }
 

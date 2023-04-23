@@ -117,11 +117,11 @@ public class DepartamentoDao extends GenericDao {
     			if (registros2.next()) {
     				registros2.beforeFirst();
     				funcionario = new Funcionario();
-    				funcionario.setId(registros.getInt("Id"));
-    				funcionario.setNome(registros.getString("Nome"));
-    				funcionario.setSexo(registros.getString("Sexo").charAt(0));
-    				funcionario.setSalario(registros.getBigDecimal("Salario"));
-    				funcionario.setPlanoSaude(registros.getBoolean("PlanoSaude"));
+    				funcionario.setId(registros2.getInt("Id"));
+    				funcionario.setNome(registros2.getString("Nome"));
+    				funcionario.setSexo(registros2.getString("Sexo").charAt(0));
+    				funcionario.setSalario(registros2.getBigDecimal("Salario"));
+    				funcionario.setPlanoSaude(registros2.getBoolean("PlanoSaude"));
     			}
     			registros2.close();
     			comando2.close();
