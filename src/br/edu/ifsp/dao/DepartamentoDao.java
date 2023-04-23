@@ -10,19 +10,21 @@ import br.edu.ifsp.model.funcionario.Funcionario;
 
 public class DepartamentoDao extends GenericDao {
 	private String instrucaoSql; // Atributo para armazenar a instrucao SQL a ser executada.
-	private PreparedStatement comando; // Atributo usado para preparar e executar instrucoes SQL.
+	private static PreparedStatement comando; // Atributo usado para preparar e executar instrucoes SQL.
+	private static PreparedStatement comando2; 
 	private ResultSet registros; // Atributo que recebe os dados retornados por uma instrucao SQL.
+	private ResultSet registros2;
 	private static String excecao = null; // Atributo para armazenar mensagens de excecao.
 
     public String insereDepartamento(Departamento departamento) {
-        instrucaoSql = "INSERT INTO DEPARTAMENTO (NomeDepto, IdFuncGerente) VALUES (?,?)";
+        instrucaoSql = "INSERT INTO Departamento (NomeDepto, IdFuncGerente) VALUES (?,?)";
         return insere(instrucaoSql, departamento.getNomeDepto(), departamento.getGerente().getId());
     }
     
     public List<Funcionario> recuperaFuncionarios() {
         Funcionario funcionario;
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-        instrucaoSql = "SELECT * FROM FUNCIONARIO";
+        instrucaoSql = "SELECT * FROM Funcionario";
         
         try {
         	excecao = ConnectionDatabase.conectaBd(); // Abre a conexao com o banco de dados.
@@ -57,6 +59,74 @@ public class DepartamentoDao extends GenericDao {
         	funcionarios = null; // Caso ocorra qualquer excecao.
         }
         return funcionarios; // Retorna o ArrayList de objetos Funcionario.
+    }
+    
+    public List<Departamento> consultaDepartamentos() {
+    	Departamento departamento;
+    	Funcionario gerente;
+        List<Departamento> departamentos = new ArrayList<Departamento>();
+        
+        instrucaoSql = "SELECT * FROM Departamento";
+        
+        try {
+        	excecao = ConnectionDatabase.conectaBd();
+        	if (excecao == null) {
+        		comando = ConnectionDatabase.getConexaoBd().prepareStatement(instrucaoSql);
+        		
+        		registros = comando.executeQuery();
+        		
+        		if (registros.next()) {
+        			registros.beforeFirst();
+        			while(registros.next()) {
+        				departamento = new Departamento();
+        				departamento.setId(registros.getInt("Id"));
+        				gerente = retornaFuncionarioPorId(registros.getInt("IdFuncGerente"));
+        				departamento.setGerente(gerente);
+        				departamento.setNomeDepto(registros.getString("NomeDepto"));
+        				departamentos.add(departamento);
+        			}
+        		}
+        		registros.close();
+        		comando.close();
+        		ConnectionDatabase.getConexaoBd().close();
+        		return departamentos;
+        	}	
+        } catch(Exception e) {
+        	excecao = "Tipo de Excecao: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
+        	System.out.println(excecao);
+        	departamentos = null;
+        }
+        return departamentos;
+    }
+    
+    public Funcionario retornaFuncionarioPorId(Integer id) {
+    	Funcionario funcionario = null;
+    	instrucaoSql = "SELECT * FROM Funcionario WHERE Funcionario.Id=" + id;
+    	
+    	try {
+    		excecao = ConnectionDatabase.conectaBd();
+    		if (excecao == null) {
+    			comando2 = ConnectionDatabase.getConexaoBd().prepareStatement(instrucaoSql);
+    			registros2 = comando2.executeQuery();
+    			
+    			if (registros2.next()) {
+    				registros2.beforeFirst();
+    				funcionario = new Funcionario();
+    				funcionario.setId(registros.getInt("Id"));
+    				funcionario.setNome(registros.getString("Nome"));
+    				funcionario.setSexo(registros.getString("Sexo").charAt(0));
+    				funcionario.setSalario(registros.getBigDecimal("Salario"));
+    				funcionario.setPlanoSaude(registros.getBoolean("PlanoSaude"));
+    			}
+    			registros2.close();
+    			comando2.close();
+    			ConnectionDatabase.getConexaoBd().close();
+    		}
+    	} catch(Exception e) {
+    		excecao = "Tipo de Excecao: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
+    		funcionario = null;
+    	}
+    	return funcionario;
     }
     
     // Esse metodo e necessario, porque os metodos "recuperaFuncionarios" e "consultaDepartamentos" retornam List<> e nao String.

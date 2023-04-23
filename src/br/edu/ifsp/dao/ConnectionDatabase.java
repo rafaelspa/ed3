@@ -11,6 +11,7 @@ public class ConnectionDatabase {
 	private static final String DATABASE = "/estudante";
 	private static final String USER = "?user=root";
 	private static final String PASSWORD = "&password=mysql";
+	private static final String ALLOW_PUBLIC_KEY_RETRIEVAL = "&allowPublicKeyRetrieval=true";
 	
 	// O protocolo SSL criptografa o fluxo de dados entre o servidor de banco de dados 
     // e a aplicacao cliente, protegendo-o de ataques externos.
@@ -21,7 +22,8 @@ public class ConnectionDatabase {
 	private static final String USE_TIMEZONE = "&useTimezone=true";
 	private static final String SERVER_TIMEZONE = "&serverTimezone=UTC";
 	
-	private static final String STRING_CONNECTION = SERVER + DATABASE + USER + PASSWORD + USE_SSL + USE_TIMEZONE + SERVER_TIMEZONE;
+	private static final String STRING_CONNECTION = 
+			SERVER + DATABASE + USER + ALLOW_PUBLIC_KEY_RETRIEVAL + PASSWORD + USE_SSL + USE_TIMEZONE + SERVER_TIMEZONE;
 
     public static String conectaBd() { // Abre a conexao com o banco de dados.
         try {

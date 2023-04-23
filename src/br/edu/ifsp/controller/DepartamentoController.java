@@ -50,5 +50,9 @@ public class DepartamentoController {
     	// Retorna a excecao lancada ao recuperar os cargos (ao abrir a interface "Cadastro de Funcionario").
     	return new DepartamentoDao().getExcecao();
     }
+    
+    public List<Departamento> recuperaDepartamentos() {
+    	return new DepartamentoDao().consultaDepartamentos();
+    }
 }
 
