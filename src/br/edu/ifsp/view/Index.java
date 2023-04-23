@@ -3,6 +3,7 @@ package br.edu.ifsp.view;
 import java.util.Scanner;
 
 import br.edu.ifsp.view.cargo.CargoCadastro;
+import br.edu.ifsp.view.cargo.CargoConsulta;
 import br.edu.ifsp.view.departamento.DepartamentoCadastro;
 import br.edu.ifsp.view.departamento.DepartamentoConsulta;
 import br.edu.ifsp.view.funcionario.FuncionarioCadastro;
@@ -66,8 +67,7 @@ public class Index {
 		else if (opcaoCadastro == 2 && opcaoOperacao == 1)
 			CargoCadastro.exibeInterface();
 		else if (opcaoCadastro == 2 && opcaoOperacao == 2)
-			System.out.println(opcaoCadastro + " - " + opcaoOperacao + "\n");
-		// CargoConsulta.exibeInterface();
+			CargoConsulta.exibeInterface();
 		else if (opcaoCadastro == 3 && opcaoOperacao == 1)
 			FuncionarioCadastro.exibeInterface();
 		else if (opcaoCadastro == 3 && opcaoOperacao == 2)

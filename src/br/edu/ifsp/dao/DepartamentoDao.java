@@ -24,7 +24,7 @@ public class DepartamentoDao extends GenericDao {
     public List<Funcionario> recuperaFuncionarios() {
         Funcionario funcionario;
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-        instrucaoSql = "SELECT * FROM Funcionario";
+        instrucaoSql = "SELECT * FROM FUNCIONARIO";
         
         try {
         	excecao = ConnectionDatabase.conectaBd(); // Abre a conexao com o banco de dados.
@@ -61,12 +61,17 @@ public class DepartamentoDao extends GenericDao {
         return funcionarios; // Retorna o ArrayList de objetos Funcionario.
     }
     
+    // Esse metodo e necessario, porque os metodos "recuperaFuncionarios" e "consultaDepartamentos" retornam List<> e nao String.
+	public String getExcecao() {
+		return excecao;
+	}
+	
     public List<Departamento> consultaDepartamentos() {
     	Departamento departamento;
     	Funcionario gerente;
         List<Departamento> departamentos = new ArrayList<Departamento>();
         
-        instrucaoSql = "SELECT * FROM Departamento";
+        instrucaoSql = "SELECT * FROM DEPARTAMENTO";
         
         try {
         	excecao = ConnectionDatabase.conectaBd();
@@ -101,7 +106,7 @@ public class DepartamentoDao extends GenericDao {
     
     public Funcionario retornaFuncionarioPorId(Integer id) {
     	Funcionario funcionario = null;
-    	instrucaoSql = "SELECT * FROM Funcionario WHERE Funcionario.Id=" + id;
+    	instrucaoSql = "SELECT * FROM FUNCIONARIO WHERE FUNCIONARIO.Id=" + id;
     	
     	try {
     		excecao = ConnectionDatabase.conectaBd();
@@ -128,9 +133,4 @@ public class DepartamentoDao extends GenericDao {
     	}
     	return funcionario;
     }
-    
-    // Esse metodo e necessario, porque os metodos "recuperaFuncionarios" e "consultaDepartamentos" retornam List<> e nao String.
-	public String getExcecao() {
-		return excecao;
-	}
 }

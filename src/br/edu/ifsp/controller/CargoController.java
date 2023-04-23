@@ -50,5 +50,9 @@ public class CargoController {
     	// Retorna a excecao lancada ao recuperar os departamentos (ao abrir a interface "Cadastro de Cargo").
     	return new CargoDao().getExcecao();
     }
+
+	public List<Cargo> recuperaCargos() {
+		return new CargoDao().consultaCargos();
+	}
 }
 
