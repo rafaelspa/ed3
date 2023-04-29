@@ -27,6 +27,16 @@ public class FuncionarioController {
 		return erros; 
     }
     
+    public List<String> alteraFuncionario(Integer id, String nome, Character sexo, BigDecimal salario, Boolean planoSaude,
+    		Cargo cargo){
+    	recebeDadosFuncionario(id, nome, sexo, salario, planoSaude, cargo);
+    	
+    	if (erros.size() == 0) {
+    		erros.add(new FuncionarioDao().alteraFuncionario(funcionario));
+    	}
+    	return erros;
+    }
+    
     // Metodo usado pelas operacoes de insercao e alteracao de funcionario.
     public void recebeDadosFuncionario(Integer id, String nome, Character sexo, BigDecimal salario, Boolean planoSaude, Cargo cargo) {
     	funcionario = new Funcionario();
