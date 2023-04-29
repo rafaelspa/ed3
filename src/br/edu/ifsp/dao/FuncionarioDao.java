@@ -26,10 +26,21 @@ public class FuncionarioDao extends GenericDao {
 
 	public String insereFuncionario(Funcionario funcionario) {
 		instrucaoSql = "INSERT INTO FUNCIONARIO (Nome, Sexo, Salario, PlanoSaude, IdCargo) VALUES (?,?,?,?,?)";
-		return insere(instrucaoSql, funcionario.getNome(), funcionario.getSexo().toString(), funcionario.getSalario(),
+		return insereAlteraExclui(instrucaoSql, funcionario.getNome(), funcionario.getSexo().toString(), funcionario.getSalario(),
 				funcionario.isPlanoSaude(), funcionario.getCargo().getId());
 	}
-
+	
+	public String alteraFuncionario(Funcionario funcionario) {
+		instrucaoSql = "UPDATE FUNCIONARIO SET Nome=?, Sexo=?, Salario=?, PlanoSaude=?, IdCargo=? WHERE FUNCIONARIO.Id=?";
+		return insereAlteraExclui(instrucaoSql, funcionario.getNome(), funcionario.getSexo().toString(), funcionario.getSalario(),
+				funcionario.isPlanoSaude(), funcionario.getCargo().getId(), funcionario.getId());
+	}
+	
+	public String excluiFuncionario(Integer id) {
+		instrucaoSql = "DELETE FROM FUNCIONARIO WHERE FUNCIONARIO.Id=?";
+		return insereAlteraExclui(instrucaoSql, id);
+	}
+	
 	public List<Cargo> recuperaCargos() {
 		Cargo cargo;
 		List<Cargo> cargos = new ArrayList<Cargo>();
