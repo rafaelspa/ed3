@@ -7,7 +7,7 @@ public class ConnectionDatabase {
 	private static Connection conexao; // Atributo que recebera os dados para conexao com o banco de dados.
 	
 	// String de conexao (Dados: servidor, banco de dados, usuario, senha, uso de SSL e fuso horario).
-	private static final String SERVER = "jdbc:mysql://localhost";
+	private static final String SERVER = "jdbc:mysql://localhost:3306";
 	private static final String DATABASE = "/estudante";
 	private static final String USER = "?user=root";
 	private static final String PASSWORD = "&password=mysql";
