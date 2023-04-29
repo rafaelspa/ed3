@@ -9,7 +9,7 @@ public class GenericDao {
      * @param parametros Valores dos campos da instrucao SQL. As reticencias no tipo Object 
      * indicam que "parametros" pode receber um numero variavel de argumentos Object. 
      */
-    protected String insere(String instrucaoSql, Object... parametros) {
+    protected String insereAlteraExclui(String instrucaoSql, Object... parametros) {
     	try {
     		String excecao = ConnectionDatabase.conectaBd(); // Abre a conexao com o banco de dados.
     		if (excecao == null) {
