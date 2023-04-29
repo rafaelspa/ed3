@@ -22,7 +22,7 @@ public class CargoDao extends GenericDao {
 
 	public String insereCargo(Cargo cargo) {
 		instrucaoSql = "INSERT INTO CARGO (Descricao, IdDepto) VALUES (?,?)";
-		return insere(instrucaoSql, cargo.getDescricao(), cargo.getDepartamento().getId());
+		return insereAlteraExclui(instrucaoSql, cargo.getDescricao(), cargo.getDepartamento().getId());
 	}
 
 	public List<Departamento> recuperaDepartamentos() {

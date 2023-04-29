@@ -18,7 +18,7 @@ public class DepartamentoDao extends GenericDao {
 
     public String insereDepartamento(Departamento departamento) {
         instrucaoSql = "INSERT INTO Departamento (NomeDepto, IdFuncGerente) VALUES (?,?)";
-        return insere(instrucaoSql, departamento.getNomeDepto(), departamento.getGerente().getId());
+        return insereAlteraExclui(instrucaoSql, departamento.getNomeDepto(), departamento.getGerente().getId());
     }
     
     public List<Funcionario> recuperaFuncionarios() {
