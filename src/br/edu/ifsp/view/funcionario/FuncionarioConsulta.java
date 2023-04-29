@@ -51,7 +51,7 @@ public class FuncionarioConsulta {
 					break;
 				}
 				case 2: {
-//					FuncionarioExclusao.exibeInterface();
+					FuncionarioExclusao.exibeInterface();
 					break;
 				} default:
 					System.out.print("\nDigite uma opcao valida. ");

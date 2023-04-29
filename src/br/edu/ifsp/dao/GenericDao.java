@@ -33,6 +33,6 @@ public class GenericDao {
         	// Caso ocorra qualquer tipo de excecao.
             return "Tipo de Excecao: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage(); 
         }
-        return null; // Se o registro foi inserido com sucesso.
+        return null; // Se o registro foi inserido/alterado/excluido com sucesso.
     }
 }

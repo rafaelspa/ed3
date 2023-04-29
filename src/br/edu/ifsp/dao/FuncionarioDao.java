@@ -37,8 +37,12 @@ public class FuncionarioDao extends GenericDao {
 	}
 	
 	public String excluiFuncionario(Integer id) {
-		instrucaoSql = "DELETE FROM FUNCIONARIO WHERE FUNCIONARIO.Id=?";
-		return insereAlteraExclui(instrucaoSql, id);
+		if (existeFuncionarioPorId(id)) {
+			instrucaoSql = "DELETE FROM FUNCIONARIO WHERE FUNCIONARIO.Id=?";
+			return insereAlteraExclui(instrucaoSql, id);			
+		} else {
+			return "Funcionario nao existente";
+		}
 	}
 	
 	public List<Cargo> recuperaCargos() {
@@ -272,4 +276,30 @@ public class FuncionarioDao extends GenericDao {
 		}
 		return cargo;
 	}
+	
+	public Boolean existeFuncionarioPorId(Integer id) {		
+		instrucaoSql = "SELECT EXISTS (SELECT FUNCIONARIO.id FROM FUNCIONARIO WHERE FUNCIONARIO.Id=" + id + ") AS 'Existe'";
+		int resposta;
+		Boolean existe = Boolean.FALSE;
+		
+		try {
+			excecao = ConnectionDatabase.conectaBd();
+			if (excecao == null) {
+				comando = ConnectionDatabase.getConexaoBd().prepareStatement(instrucaoSql);
+				registros = comando.executeQuery();
+				registros.first();
+				resposta = registros.getInt("Existe");
+				existe = resposta == 1 ? Boolean.TRUE : Boolean.FALSE;
+			}
+			registros.close();
+			comando.close();
+			ConnectionDatabase.getConexaoBd().close();
+			} catch (Exception e) {
+				excecao = "Tipo de Excecao: " + e.getClass().getSimpleName() + "\nMensagem: " + e.getMessage();
+				System.out.println(excecao);
+				return null;
+			}
+			return existe;
+		}
+	
 }
